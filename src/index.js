@@ -1,7 +1,7 @@
 import express, { urlencoded } from "express";
 import "dotenv/config";
 import "./storage/MongoDb.js";
-import { __dirname } from "./utils/path.js";
+import { __dirname } from "../path.js";
 import cors from "cors";
 import tasksManagerRouter from "./routes/tasksManager.routes.js";
 import loginRouter from "./routes/login.routes.js";
@@ -20,10 +20,11 @@ app.use("/", express.static(__dirname + "/public"));
 
 // ROUTES
 
+app.get("*", (req, res) => {
+ res.sendFile(`${__dirname}/public/index.html`)
+});
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/tasksmanager", tasksManagerRouter);
 app.use("/task", taskRouter);
-app.get("*", (req, res) => {
-  res.redirect("/login");
-});
+
