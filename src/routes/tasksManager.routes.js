@@ -3,9 +3,9 @@ import taskModel from "../storage/models/taskModel.js";
 
 const tasksManagerRouter = Router();
 
-tasksManagerRouter.get("/", async (req, res) => {
+tasksManagerRouter.get("/:userId", async (req, res) => {
   try {
-    const { userId } = req.query;
+    const { userId } = req.params;
     const tasks = await taskModel.find({ userId });
     res.status(200).json(tasks);
   } catch (error) {

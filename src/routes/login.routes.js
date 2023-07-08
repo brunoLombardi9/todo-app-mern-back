@@ -13,7 +13,7 @@ loginRouter.post("/", async (req, res) => {
     if (!userExist || !dehashedPassword) {
       return res
         .status(409)
-        .json({ error: "Email or password are incorrect." });
+        .json({ error: "El email o la contraseña son incorrectos." });
     }
 
     const userData = {
@@ -22,7 +22,7 @@ loginRouter.post("/", async (req, res) => {
     };
     res.status(200).json(userData);
   } catch (err) {
-    res.status(500).json({ error: "Error on the server, try later." });
+    res.status(500).json({ error: "El email ingresado no existe." });
   }
 });
 

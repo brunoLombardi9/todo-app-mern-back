@@ -9,7 +9,7 @@ signupRouter.post("/", async (req, res) => {
     const { email, password } = req.body;
     const userExist = await userModel.findOne({ email });
     if (userExist) {
-      return res.status(409).json({ error: "User Already exists." });
+      return res.status(409).json({ error: "El email ingresado ya existe." });
     }
 
     const hashedPassword = await hashData(password);
@@ -20,7 +20,7 @@ signupRouter.post("/", async (req, res) => {
     };
     res.status(200).json(userData);
   } catch (error) {
-    res.status(500).json({ error: "Error on the server, try later." });
+    res.status(500).json({ error: "No se encontró el email ingresado." });
   }
 });
 
